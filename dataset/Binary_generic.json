@@ -1,0 +1,19 @@
+{
+	"name": "Binary_generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_DataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "root/sales/zip",
+				"fileSystem": "landing"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

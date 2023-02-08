@@ -1,0 +1,23 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"database_name": {
+				"type": "string",
+				"defaultValue": "AdventureWorksa"
+			},
+			"server_name": {
+				"type": "string",
+				"defaultValue": "sql-cc-eng-vvc01.database.windows.net"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

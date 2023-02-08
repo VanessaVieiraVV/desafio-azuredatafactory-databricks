@@ -1,0 +1,19 @@
+{
+	"name": "ls_AzureSqlDatabase",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=sql-cc-eng-vvc01.database.windows.net;Initial Catalog=AdventureWorksLT;User ID=vvc",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_AzureKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sn-azsql-pwd-cc-vvc03"
+			}
+		}
+	}
+}

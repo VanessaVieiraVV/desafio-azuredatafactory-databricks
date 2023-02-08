@@ -1,0 +1,9 @@
+{
+	"name": "adf-ava-cc-eng-vvc01",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f9a86cc9-08da-4d2d-8afb-4626317342fd",
+		"tenantId": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+	}
+}

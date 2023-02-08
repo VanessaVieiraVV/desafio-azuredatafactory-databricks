@@ -1,0 +1,157 @@
+{
+	"name": "pip-desafio-adf",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get_tables",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Tables_to_load",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select table_name from INFORMATION_SCHEMA.TABLES where table_schema = '@{pipeline().parameters.schema_par}' and TABLE_TYPE = 'BASE TABLE';\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable_gen",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_name_table": "Product",
+							"ds_schema_table": "SalesLT"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get_tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get_tables').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "If Condition",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@contains(variables('tables_to_load'), item().table_name)",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Execute Pipeline",
+										"type": "ExecutePipeline",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pip_copy_data_sql_desafio",
+												"type": "PipelineReference"
+											},
+											"waitOnCompletion": true,
+											"parameters": {
+												"schema_par": {
+													"value": "@pipeline().parameters.schema_par",
+													"type": "Expression"
+												},
+												"table_name_par": {
+													"value": "@item().table_name",
+													"type": "Expression"
+												},
+												"container_par": {
+													"value": "@pipeline().parameters.container_par",
+													"type": "Expression"
+												},
+												"directory_par": {
+													"value": "@pipeline().parameters.directory_par",
+													"type": "Expression"
+												}
+											}
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Tables_to_load",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tables_to_load",
+					"value": [
+						"Product",
+						"Address",
+						"Customer",
+						"CustomerAddress",
+						"ProductCategory",
+						"ProductDescription",
+						"ProductModel",
+						"ProductModelProductDescription",
+						"SalesOrderDetail",
+						"SalesOrderHeader"
+					]
+				}
+			}
+		],
+		"parameters": {
+			"container_par": {
+				"type": "string",
+				"defaultValue": "desafio-adf"
+			},
+			"directory_par": {
+				"type": "string",
+				"defaultValue": "adventureworks/incremental"
+			},
+			"schema_par": {
+				"type": "string",
+				"defaultValue": "SalesLT"
+			}
+		},
+		"variables": {
+			"tables_to_load": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-02-03T20:48:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
