@@ -7,7 +7,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -20,10 +20,17 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Address",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -54,7 +61,13 @@
 				"inputs": [
 					{
 						"referenceName": "Parquet",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_directory": {
+								"value": "@concat(pipeline().parameters.container_par,'/', 'Address')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -63,6 +76,22 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Address",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"parameters": {
@@ -72,7 +101,7 @@
 			},
 			"directory_par": {
 				"type": "string",
-				"defaultValue": "adventureworks/incremental/product"
+				"defaultValue": "adventureworks/incremental"
 			}
 		},
 		"annotations": []
