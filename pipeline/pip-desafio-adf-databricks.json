@@ -1,13 +1,13 @@
 {
-	"name": "desafio-adf-databricks",
+	"name": "pip-desafio-adf-databricks",
 	"properties": {
 		"activities": [
 			{
-				"name": "Notebook1",
+				"name": "Transformation",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -78,11 +78,17 @@
 				]
 			},
 			{
-				"name": "Wait1",
+				"name": "Wait",
 				"type": "Wait",
 				"dependsOn": [
 					{
 						"activity": "Address",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "CustomerAddress",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -92,6 +98,54 @@
 				"typeProperties": {
 					"waitTimeInSeconds": 1
 				}
+			},
+			{
+				"name": "CustomerAddress",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureDatabricksDeltaLakeSink",
+						"importSettings": {
+							"type": "AzureDatabricksDeltaLakeImportCommand"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_directory": {
+								"value": "@concat(pipeline().parameters.container_par,'/', 'CustomerAddress')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureDatabricksDeltaLakeDataset1",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
