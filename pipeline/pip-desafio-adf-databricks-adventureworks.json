@@ -1,13 +1,33 @@
 {
-	"name": "pip-desafio-adf-databricks",
+	"name": "pip-desafio-adf-databricks-adventureworks",
 	"properties": {
 		"activities": [
 			{
-				"name": "Transformation",
+				"name": "Move",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/bronze"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Address",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Wait",
+						"activity": "Move",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -30,9 +50,16 @@
 				}
 			},
 			{
-				"name": "Address",
-				"type": "Copy",
-				"dependsOn": [],
+				"name": "Customer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -42,43 +69,231 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "ParquetSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						}
-					},
-					"sink": {
-						"type": "AzureDatabricksDeltaLakeSink",
-						"importSettings": {
-							"type": "AzureDatabricksDeltaLakeImportCommand"
-						}
-					},
-					"enableStaging": false
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
 				},
-				"inputs": [
-					{
-						"referenceName": "Parquet",
-						"type": "DatasetReference",
-						"parameters": {
-							"ds_directory": {
-								"value": "@concat(pipeline().parameters.container_par,'/', 'Address')",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureDatabricksDeltaLakeDataset1",
-						"type": "DatasetReference"
-					}
-				]
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
 			},
 			{
-				"name": "Wait",
+				"name": "CustomerAddress",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Product",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductCategory",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductDescription",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductModel",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductModelProductDescription",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SalesOrderDetail",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SalesOrderHeader",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Wait1",
 				"type": "Wait",
 				"dependsOn": [
 					{
@@ -88,7 +303,55 @@
 						]
 					},
 					{
+						"activity": "Customer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
 						"activity": "CustomerAddress",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Product",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "ProductCategory",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "ProductDescription",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "ProductModel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "ProductModelProductDescription",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SalesOrderDetail",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SalesOrderHeader",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -100,9 +363,16 @@
 				}
 			},
 			{
-				"name": "CustomerAddress",
-				"type": "Copy",
-				"dependsOn": [],
+				"name": "StarSchema",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -112,40 +382,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "ParquetSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						}
-					},
-					"sink": {
-						"type": "AzureDatabricksDeltaLakeSink",
-						"importSettings": {
-							"type": "AzureDatabricksDeltaLakeImportCommand"
-						}
-					},
-					"enableStaging": false
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
 				},
-				"inputs": [
-					{
-						"referenceName": "Parquet",
-						"type": "DatasetReference",
-						"parameters": {
-							"ds_directory": {
-								"value": "@concat(pipeline().parameters.container_par,'/', 'CustomerAddress')",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureDatabricksDeltaLakeDataset1",
-						"type": "DatasetReference"
-					}
-				]
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
