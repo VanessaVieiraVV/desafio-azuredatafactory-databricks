@@ -131,7 +131,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline1",
+				"name": "Databricks",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
