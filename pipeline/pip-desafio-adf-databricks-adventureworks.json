@@ -25,6 +25,24 @@
 					"notebookPath": {
 						"value": "@concat('/Users/vanessa.da.conceicaoavanade.com/Desafio_Caminhos/', pipeline().parameters.table_name_par)",
 						"type": "Expression"
+					},
+					"baseParameters": {
+						"source_directory": {
+							"value": "@pipeline().parameters.source_directory_par",
+							"type": "Expression"
+						},
+						"dest_directory": {
+							"value": "@pipeline().parameters.dest_directory_par",
+							"type": "Expression"
+						},
+						"file_name": {
+							"value": "@pipeline().parameters.table_name_par",
+							"type": "Expression"
+						},
+						"table_name": {
+							"value": "@pipeline().parameters.table_name_par",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -50,23 +68,15 @@
 						"type": "Expression"
 					},
 					"baseParameters": {
-						"source_container": {
-							"value": "landing",
-							"type": "Expression"
-						},
 						"source_directory": {
 							"value": "@pipeline().parameters.source_directory_par",
 							"type": "Expression"
 						},
-						"dest_container": "bronze",
 						"dest_directory": {
 							"value": "@pipeline().parameters.dest_directory_par",
 							"type": "Expression"
 						},
-						"file_name": {
-							"value": "@pipeline().parameters.file_name_par",
-							"type": "Expression"
-						},
+						"file_name": "Move_Landing_To_Silver",
 						"table_name": {
 							"value": "@pipeline().parameters.table_name_par",
 							"type": "Expression"

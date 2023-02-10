@@ -73,7 +73,7 @@
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Execute Pipeline",
+										"name": "CopyData",
 										"type": "ExecutePipeline",
 										"dependsOn": [],
 										"userProperties": [],
@@ -100,6 +100,38 @@
 													"value": "@concat(pipeline().parameters.directory_par, item().table_name)",
 													"type": "Expression"
 												}
+											}
+										}
+									},
+									{
+										"name": "Execute Pipeline1",
+										"type": "ExecutePipeline",
+										"dependsOn": [
+											{
+												"activity": "CopyData",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pip-desafio-adf-databricks-adventureworks",
+												"type": "PipelineReference"
+											},
+											"waitOnCompletion": true,
+											"parameters": {
+												"source_directory_par": {
+													"value": "@pipeline().parameters.directory_par",
+													"type": "Expression"
+												},
+												"dest_directory_par": {
+													"value": "@pipeline().parameters.directory_par",
+													"type": "Expression"
+												},
+												"file_name_par": "Move_Landing_To_Silver",
+												"table_name_par": "@item().table_name"
 											}
 										}
 									}
@@ -131,8 +163,8 @@
 				}
 			},
 			{
-				"name": "Databricks",
-				"type": "ExecutePipeline",
+				"name": "StarSchema",
+				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
 						"activity": "ForEach",
@@ -141,13 +173,20 @@
 						]
 					}
 				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pip-desafio-adf-databricks-adventureworks",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
+					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
@@ -163,6 +202,10 @@
 			"schema_par": {
 				"type": "string",
 				"defaultValue": "SalesLT"
+			},
+			"notebook_path_par": {
+				"type": "string",
+				"defaultValue": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/"
 			}
 		},
 		"variables": {
