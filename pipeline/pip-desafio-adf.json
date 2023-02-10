@@ -193,11 +193,11 @@
 		"parameters": {
 			"container_par": {
 				"type": "string",
-				"defaultValue": "desafio-adf"
+				"defaultValue": "landing"
 			},
 			"directory_par": {
 				"type": "string",
-				"defaultValue": "adventureworks/incremental"
+				"defaultValue": "adventureworks/incremental/"
 			},
 			"schema_par": {
 				"type": "string",
