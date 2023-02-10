@@ -76,7 +76,7 @@
 							"value": "@pipeline().parameters.dest_directory_par",
 							"type": "Expression"
 						},
-						"file_name": "Move_Landing_To_Silver",
+						"file_name": "Move_landing_to_silver",
 						"table_name": {
 							"value": "@pipeline().parameters.table_name_par",
 							"type": "Expression"
@@ -99,7 +99,8 @@
 				"defaultValue": "adventureworks/incremental/"
 			},
 			"file_name_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "data_284c9951-8bc6-4939-8333-a1c973f1dee5_ce12d31f-c502-4fd5-93ee-af6b50af945b.parquet"
 			},
 			"table_name_par": {
 				"type": "string",
