@@ -130,7 +130,7 @@
 													"value": "@pipeline().parameters.directory_par",
 													"type": "Expression"
 												},
-												"file_name_par": "Move_Landing_To_Silver",
+												"file_name_par": "@item().table_name",
 												"table_name_par": "@item().table_name"
 											}
 										}
