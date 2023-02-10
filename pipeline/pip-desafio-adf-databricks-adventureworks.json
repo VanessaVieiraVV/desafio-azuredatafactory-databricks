@@ -64,7 +64,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": {
-						"value": "@concat(pipeline().parameters.notebook_path_par, 'Move_Landing_To_Bronze')",
+						"value": "@concat(pipeline().parameters.notebook_path_par, 'Move_landing_to_bronze')",
 						"type": "Expression"
 					},
 					"baseParameters": {
