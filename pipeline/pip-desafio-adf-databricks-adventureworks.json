@@ -3,7 +3,37 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Move",
+				"name": "Silver",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": {
+						"value": "@concat('/Users/vanessa.da.conceicaoavanade.com/Desafio_Caminhos/', pipeline().parameters.table_name_par)",
+						"type": "Expression"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Bronze",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -15,374 +45,33 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/bronze"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Address",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Customer",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "CustomerAddress",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Product",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "ProductCategory",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "ProductDescription",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "ProductModel",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "ProductModelProductDescription",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "SalesOrderDetail",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "SalesOrderHeader",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_AzureDatabricks",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Wait",
-				"type": "Wait",
-				"dependsOn": [
-					{
-						"activity": "Address",
-						"dependencyConditions": [
-							"Succeeded"
-						]
+					"notebookPath": {
+						"value": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/Move_Landing_To_Silver",
+						"type": "Expression"
 					},
-					{
-						"activity": "Customer",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "CustomerAddress",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Product",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "ProductCategory",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "ProductDescription",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "ProductModel",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "ProductModelProductDescription",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "SalesOrderDetail",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "SalesOrderHeader",
-						"dependencyConditions": [
-							"Succeeded"
-						]
+					"baseParameters": {
+						"source_container": {
+							"value": "landing",
+							"type": "Expression"
+						},
+						"source_directory": {
+							"value": "@pipeline().parameters.source_directory_par",
+							"type": "Expression"
+						},
+						"dest_container": "bronze",
+						"dest_directory": {
+							"value": "@pipeline().parameters.dest_directory_par",
+							"type": "Expression"
+						},
+						"file_name": {
+							"value": "@pipeline().parameters.file_name_par",
+							"type": "Expression"
+						},
+						"table_name": {
+							"value": "@pipeline().parameters.table_name_par",
+							"type": "Expression"
+						}
 					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"waitTimeInSeconds": 1
-				}
-			},
-			{
-				"name": "StarSchema",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Wait",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_AzureDatabricks",
@@ -391,13 +80,17 @@
 			}
 		],
 		"parameters": {
-			"container_par": {
-				"type": "string",
-				"defaultValue": "landing"
+			"source_directory_par": {
+				"type": "string"
 			},
-			"directory_par": {
-				"type": "string",
-				"defaultValue": "adventureworks/incremental"
+			"dest_directory_par": {
+				"type": "string"
+			},
+			"file_name_par": {
+				"type": "string"
+			},
+			"table_name_par": {
+				"type": "string"
 			}
 		},
 		"annotations": []
