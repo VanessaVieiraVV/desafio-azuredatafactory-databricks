@@ -91,19 +91,23 @@
 		],
 		"parameters": {
 			"source_directory_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "adventureworks/incremental/"
 			},
 			"dest_directory_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "adventureworks/incremental/"
 			},
 			"file_name_par": {
 				"type": "string"
 			},
 			"table_name_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Customer"
 			},
 			"notebook_path_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/"
 			}
 		},
 		"annotations": []
