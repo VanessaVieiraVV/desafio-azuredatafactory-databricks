@@ -103,11 +103,11 @@
 			},
 			"file_name_par": {
 				"type": "string",
-				"defaultValue": "data_448e7f2f-97f3-4fc7-8efa-7aae00bd8a26_bda58d82-086e-4b65-a885-685b1222eb8d.parquet"
+				"defaultValue": "data_9c991e01-5bad-4691-bc78-d1e48f0a8bc1_81187c96-1f7b-4659-9ce2-d30bfcd59ceb.parquet"
 			},
 			"table_name_par": {
 				"type": "string",
-				"defaultValue": "SalesOrderDetail"
+				"defaultValue": "ProductModelProductDescription"
 			},
 			"notebook_path_par": {
 				"type": "string",
