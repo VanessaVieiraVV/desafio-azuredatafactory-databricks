@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-ava-cc-eng-vvc01"
+		},
+		"ls_AzureSqlDatabase_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=sql-cc-eng-vvc01.database.windows.net;Initial Catalog=AdventureWorksLT;User ID=vvc"
+		},
+		"ls_DataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"ls_AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"value": "0208-205725-5m3lb3r"
+		},
+		"ls_AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://akv-cc-eng-vvc03.vault.azure.net/"
+		},
+		"ls_DataLakeStorage_properties_typeProperties_url": {
+			"value": "https://dlsavaccengvvc01.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
