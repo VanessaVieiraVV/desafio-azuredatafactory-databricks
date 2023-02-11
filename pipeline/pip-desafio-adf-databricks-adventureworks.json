@@ -76,7 +76,10 @@
 							"value": "@pipeline().parameters.dest_directory_par",
 							"type": "Expression"
 						},
-						"file_name": "Move_landing_to_silver",
+						"file_name": {
+							"value": "@pipeline().parameters.file_name_par",
+							"type": "Expression"
+						},
 						"table_name": {
 							"value": "@pipeline().parameters.table_name_par",
 							"type": "Expression"
@@ -100,11 +103,11 @@
 			},
 			"file_name_par": {
 				"type": "string",
-				"defaultValue": "data_284c9951-8bc6-4939-8333-a1c973f1dee5_ce12d31f-c502-4fd5-93ee-af6b50af945b.parquet"
+				"defaultValue": "data_448e7f2f-97f3-4fc7-8efa-7aae00bd8a26_bda58d82-086e-4b65-a885-685b1222eb8d.parquet"
 			},
 			"table_name_par": {
 				"type": "string",
-				"defaultValue": "Customer"
+				"defaultValue": "SalesOrderDetail"
 			},
 			"notebook_path_par": {
 				"type": "string",
