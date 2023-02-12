@@ -97,7 +97,7 @@
 													"type": "Expression"
 												},
 												"directory_par": {
-													"value": "pipeline().parameters.directory_par",
+													"value": "@pipeline().parameters.directory_par",
 													"type": "Expression"
 												},
 												"notebook_path_par": {
