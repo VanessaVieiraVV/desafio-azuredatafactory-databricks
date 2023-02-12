@@ -232,7 +232,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/transformacao"
+					"notebookPath": {
+						"value": "@concat(pipeline().parameters.notebook_path_par, 'Star_Schema')",
+						"type": "Expression"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_AzureDatabricks",
