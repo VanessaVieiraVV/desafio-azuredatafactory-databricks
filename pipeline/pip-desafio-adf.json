@@ -108,7 +108,7 @@
 										"type": "ExecutePipeline",
 										"dependsOn": [
 											{
-												"activity": "CopyData",
+												"activity": "GetFileName",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -147,7 +147,7 @@
 										"type": "GetMetadata",
 										"dependsOn": [
 											{
-												"activity": "Databricks",
+												"activity": "CopyData",
 												"dependencyConditions": [
 													"Succeeded"
 												]
