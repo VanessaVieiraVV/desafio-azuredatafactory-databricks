@@ -81,10 +81,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Parquet",
-						"type": "DatasetReference",
-						"parameters": {
-							"ds_filename": "*.parquet"
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						{
