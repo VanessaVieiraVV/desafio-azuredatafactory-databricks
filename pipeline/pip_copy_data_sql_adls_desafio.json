@@ -318,15 +318,14 @@
 											"type": "Expression"
 										},
 										"ds_directory": {
-											"value": "@pipeline().parameters.directory_par",
+											"value": "@concat(pipeline().parameters.directory_par, '/')",
 											"type": "Expression"
 										}
 									}
 								},
 								"fieldList": [
 									"itemName",
-									"structure",
-									"contentMD5"
+									"structure"
 								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
