@@ -102,7 +102,8 @@
 				"defaultValue": "adventureworks/incremental/"
 			},
 			"file_name_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "\"\""
 			},
 			"table_name_par": {
 				"type": "string",
