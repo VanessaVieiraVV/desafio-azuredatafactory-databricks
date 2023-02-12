@@ -157,6 +157,13 @@
 					"notebookPath": {
 						"value": "@concat(pipeline().parameters.notebook_path_par, 'Star_Schema')",
 						"type": "Expression"
+					},
+					"baseParameters": {
+						"source_directory": {
+							"value": "adventureworks",
+							"type": "Expression"
+						},
+						"dest_directory": "adventureworks"
 					}
 				},
 				"linkedServiceName": {
