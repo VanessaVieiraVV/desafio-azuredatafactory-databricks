@@ -361,7 +361,7 @@
 										"type": "Expression"
 									},
 									"file_name_par": {
-										"value": "/*.parquet",
+										"value": "@activity('GetFileName').output.itemName",
 										"type": "Expression"
 									},
 									"table_name_par": {
