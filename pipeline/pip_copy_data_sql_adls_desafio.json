@@ -360,7 +360,7 @@
 										"type": "Expression"
 									},
 									"file_name_par": {
-										"value": "@concat(pipeline().parameters.directory_par,pipeline().parameters.table_name_par, '/*.parquet')",
+										"value": "@concat(pipeline().parameters.directory_par, '/*.parquet')",
 										"type": "Expression"
 									},
 									"table_name_par": {
