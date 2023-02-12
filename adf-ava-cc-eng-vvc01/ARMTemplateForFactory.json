@@ -60,7 +60,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat(pipeline().parameters.notebook_path_par, pipeline().parameters.table_name_par)",
+								"value": "@concat(pipeline().parameters.notebook_path_par, 'Bronze_to_silver', pipeline().parameters.table_name_par)",
 								"type": "Expression"
 							},
 							"baseParameters": {
@@ -269,11 +269,11 @@
 												}
 											},
 											{
-												"name": "Execute Pipeline1",
+												"name": "Databricks",
 												"type": "ExecutePipeline",
 												"dependsOn": [
 													{
-														"activity": "CopyData",
+														"activity": "GetFileName",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -295,8 +295,58 @@
 															"value": "@pipeline().parameters.directory_par",
 															"type": "Expression"
 														},
-														"file_name_par": "@item().table_name",
-														"table_name_par": "@item().table_name"
+														"file_name_par": {
+															"value": "@activity('GetFileName').output.itemName",
+															"type": "Expression"
+														},
+														"table_name_par": "@item().table_name",
+														"notebook_path_par": {
+															"value": "@pipeline().parameters.notebook_path_par",
+															"type": "Expression"
+														}
+													}
+												}
+											},
+											{
+												"name": "GetFileName",
+												"type": "GetMetadata",
+												"dependsOn": [
+													{
+														"activity": "CopyData",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataset": {
+														"referenceName": "Parquet",
+														"type": "DatasetReference",
+														"parameters": {
+															"ds_container": {
+																"value": "@pipeline().parameters.container_par",
+																"type": "Expression"
+															},
+															"ds_directory": {
+																"value": "@concat(pipeline().parameters.directory_par, item().table_name)",
+																"type": "Expression"
+															}
+														}
+													},
+													"fieldList": [
+														"itemName"
+													],
+													"storeSettings": {
+														"type": "AzureBlobFSReadSettings",
+														"enablePartitionDiscovery": false
 													}
 												}
 											}
@@ -389,7 +439,8 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_gen')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_AzureDatabricks')]",
 				"[concat(variables('factoryId'), '/pipelines/pip_copy_data_sql_desafio')]",
-				"[concat(variables('factoryId'), '/pipelines/pip-desafio-adf-databricks-adventureworks')]"
+				"[concat(variables('factoryId'), '/pipelines/pip-desafio-adf-databricks-adventureworks')]",
+				"[concat(variables('factoryId'), '/datasets/Parquet')]"
 			]
 		},
 		{
