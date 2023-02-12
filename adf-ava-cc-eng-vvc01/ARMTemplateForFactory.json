@@ -60,7 +60,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"notebookPath": {
-								"value": "@concat(pipeline().parameters.notebook_path_par, 'Bronze_to_silver', pipeline().parameters.table_name_par)",
+								"value": "@concat(pipeline().parameters.notebook_path_par, 'Bronze_to_silver/', pipeline().parameters.table_name_par)",
 								"type": "Expression"
 							},
 							"baseParameters": {
