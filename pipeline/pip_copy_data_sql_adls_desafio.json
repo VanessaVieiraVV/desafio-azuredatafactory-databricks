@@ -237,7 +237,7 @@
 							"type": "Script",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata1",
+									"activity": "Get Metadata",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -269,7 +269,7 @@
 							}
 						},
 						{
-							"name": "Get Metadata1",
+							"name": "Get Metadata",
 							"type": "GetMetadata",
 							"dependsOn": [
 								{
