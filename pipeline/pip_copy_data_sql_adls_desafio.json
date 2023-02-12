@@ -189,7 +189,28 @@
 										"type": "ParquetWriteSettings"
 									}
 								},
-								"enableStaging": false,
+								"enableStaging": true,
+								"stagingSettings": {
+									"linkedServiceName": {
+										"referenceName": "ls_DataLakeStorage",
+										"type": "LinkedServiceReference"
+									},
+									"path": "landing/stg"
+								},
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "ls_DataLakeStorage",
+											"type": "LinkedServiceReference"
+										},
+										"path": "landing/log"
+									}
+								},
 								"translator": {
 									"type": "TabularTranslator",
 									"typeConversion": true,
@@ -303,7 +324,9 @@
 									}
 								},
 								"fieldList": [
-									"itemName"
+									"itemName",
+									"structure",
+									"contentMD5"
 								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
