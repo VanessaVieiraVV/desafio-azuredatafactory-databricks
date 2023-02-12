@@ -104,11 +104,11 @@
 										}
 									},
 									{
-										"name": "Execute Pipeline1",
+										"name": "Databricks",
 										"type": "ExecutePipeline",
 										"dependsOn": [
 											{
-												"activity": "Get Metadata1",
+												"activity": "GetFileName",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -136,7 +136,7 @@
 										}
 									},
 									{
-										"name": "Get Metadata1",
+										"name": "GetFileName",
 										"type": "GetMetadata",
 										"dependsOn": [
 											{
