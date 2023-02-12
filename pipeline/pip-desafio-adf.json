@@ -99,6 +99,10 @@
 												"directory_par": {
 													"value": "@concat(pipeline().parameters.directory_par, item().table_name)",
 													"type": "Expression"
+												},
+												"notebook_path_par": {
+													"value": "@pipeline().parameters.notebook_path_par",
+													"type": "Expression"
 												}
 											}
 										}
