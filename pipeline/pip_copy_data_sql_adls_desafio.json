@@ -237,7 +237,7 @@
 							"type": "Script",
 							"dependsOn": [
 								{
-									"activity": "Copy data",
+									"activity": "Get Metadata1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -266,6 +266,49 @@
 									}
 								],
 								"scriptBlockExecutionTimeout": "02:00:00"
+							}
+						},
+						{
+							"name": "Get Metadata1",
+							"type": "GetMetadata",
+							"dependsOn": [
+								{
+									"activity": "Copy data",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"ds_container": {
+											"value": "@pipeline().parameters.container_par",
+											"type": "Expression"
+										},
+										"ds_directory": {
+											"value": "@pipeline().parameters.directory_par",
+											"type": "Expression"
+										}
+									}
+								},
+								"fieldList": [
+									"itemName"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								}
 							}
 						}
 					],
