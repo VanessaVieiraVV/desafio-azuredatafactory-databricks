@@ -130,8 +130,15 @@
 													"value": "@pipeline().parameters.directory_par",
 													"type": "Expression"
 												},
-												"file_name_par": "@item().table_name",
-												"table_name_par": "@item().table_name"
+												"file_name_par": {
+													"value": "@activity('GetFileName').output.itemName",
+													"type": "Expression"
+												},
+												"table_name_par": "@item().table_name",
+												"notebook_path_par": {
+													"value": "@pipeline().parameters.notebook_path_par",
+													"type": "Expression"
+												}
 											}
 										}
 									},
