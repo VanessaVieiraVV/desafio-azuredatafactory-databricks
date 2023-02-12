@@ -363,7 +363,7 @@
 										"type": "Expression"
 									},
 									"file_name_par": {
-										"value": "@activity('GetFileName').output.item_name",
+										"value": "@activity('GetFileName').output.childItems.item_name",
 										"type": "Expression"
 									},
 									"table_name_par": "@item().table_name",
