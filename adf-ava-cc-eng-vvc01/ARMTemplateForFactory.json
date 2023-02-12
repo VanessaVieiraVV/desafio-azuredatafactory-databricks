@@ -267,45 +267,6 @@
 														}
 													}
 												}
-											},
-											{
-												"name": "Databricks",
-												"type": "ExecutePipeline",
-												"dependsOn": [
-													{
-														"activity": "CopyData",
-														"dependencyConditions": [
-															"Succeeded"
-														]
-													}
-												],
-												"userProperties": [],
-												"typeProperties": {
-													"pipeline": {
-														"referenceName": "pip-desafio-adf-databricks-adventureworks",
-														"type": "PipelineReference"
-													},
-													"waitOnCompletion": true,
-													"parameters": {
-														"source_directory_par": {
-															"value": "@pipeline().parameters.directory_par",
-															"type": "Expression"
-														},
-														"dest_directory_par": {
-															"value": "@pipeline().parameters.directory_par",
-															"type": "Expression"
-														},
-														"file_name_par": {
-															"value": "@activity('CopyData').output",
-															"type": "Expression"
-														},
-														"table_name_par": "@item().table_name",
-														"notebook_path_par": {
-															"value": "@pipeline().parameters.notebook_path_par",
-															"type": "Expression"
-														}
-													}
-												}
 											}
 										]
 									}
@@ -398,8 +359,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_gen')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_AzureDatabricks')]",
-				"[concat(variables('factoryId'), '/pipelines/pip_copy_data_sql_desafio')]",
-				"[concat(variables('factoryId'), '/pipelines/pip-desafio-adf-databricks-adventureworks')]"
+				"[concat(variables('factoryId'), '/pipelines/pip_copy_data_sql_desafio')]"
 			]
 		},
 		{
@@ -1248,7 +1208,7 @@
 									"type": "Script",
 									"dependsOn": [
 										{
-											"activity": "Copy data",
+											"activity": "Databricks",
 											"dependencyConditions": [
 												"Succeeded"
 											]
@@ -1277,6 +1237,88 @@
 											}
 										],
 										"scriptBlockExecutionTimeout": "02:00:00"
+									}
+								},
+								{
+									"name": "GetFileName",
+									"type": "GetMetadata",
+									"dependsOn": [
+										{
+											"activity": "Copy data",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "Parquet",
+											"type": "DatasetReference",
+											"parameters": {
+												"ds_container": {
+													"value": "@pipeline().parameters.container_par",
+													"type": "Expression"
+												},
+												"ds_directory": {
+													"value": "@pipeline().parameters.directory_par",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"itemName"
+										],
+										"storeSettings": {
+											"type": "AzureBlobFSReadSettings",
+											"enablePartitionDiscovery": false
+										}
+									}
+								},
+								{
+									"name": "Databricks",
+									"type": "ExecutePipeline",
+									"dependsOn": [
+										{
+											"activity": "GetFileName",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pip-desafio-adf-databricks-adventureworks",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"source_directory_par": {
+												"value": "@pipeline().parameters.directory_par",
+												"type": "Expression"
+											},
+											"dest_directory_par": {
+												"value": "@pipeline().parameters.directory_par",
+												"type": "Expression"
+											},
+											"file_name_par": {
+												"value": "@activity('GetFileName').output.item_name",
+												"type": "Expression"
+											},
+											"table_name_par": "@item().table_name",
+											"notebook_path_par": {
+												"value": "@pipeline().parameters.notebook_path_par",
+												"type": "Expression"
+											}
+										}
 									}
 								}
 							],
@@ -1331,6 +1373,10 @@
 					"directory_par": {
 						"type": "string",
 						"defaultValue": "adventureworks/incremental/product"
+					},
+					"notebook_path_par": {
+						"type": "string",
+						"defaultValue": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/"
 					}
 				},
 				"variables": {
@@ -1347,7 +1393,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_gen')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet')]",
-				"[concat(variables('factoryId'), '/linkedServices/ls_AzureSqlDatabase')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_AzureSqlDatabase')]",
+				"[concat(variables('factoryId'), '/pipelines/pip-desafio-adf-databricks-adventureworks')]"
 			]
 		},
 		{
@@ -1591,7 +1638,7 @@
 									"type": "Script",
 									"dependsOn": [
 										{
-											"activity": "Copy data",
+											"activity": "GetFileName",
 											"dependencyConditions": [
 												"Succeeded"
 											]
@@ -1620,6 +1667,49 @@
 											}
 										],
 										"scriptBlockExecutionTimeout": "02:00:00"
+									}
+								},
+								{
+									"name": "GetFileName",
+									"type": "GetMetadata",
+									"dependsOn": [
+										{
+											"activity": "Copy data",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "Parquet",
+											"type": "DatasetReference",
+											"parameters": {
+												"ds_container": {
+													"value": "@pipeline().parameters.container_par",
+													"type": "Expression"
+												},
+												"ds_directory": {
+													"value": "@concat(pipeline().parameters.directory_par, pipeline().parameters.table_name_par)",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"itemName"
+										],
+										"storeSettings": {
+											"type": "AzureBlobFSReadSettings",
+											"enablePartitionDiscovery": false
+										}
 									}
 								}
 							],
