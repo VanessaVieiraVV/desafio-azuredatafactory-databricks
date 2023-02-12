@@ -237,7 +237,7 @@
 							"type": "Script",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata",
+									"activity": "GetFileName",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -269,7 +269,7 @@
 							}
 						},
 						{
-							"name": "Get Metadata",
+							"name": "GetFileName",
 							"type": "GetMetadata",
 							"dependsOn": [
 								{

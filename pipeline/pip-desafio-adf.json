@@ -131,7 +131,7 @@
 													"type": "Expression"
 												},
 												"file_name_par": {
-													"value": "@activity('CopyData').output.value.file_name",
+													"value": "@activity('GetFileName').output.item_name",
 													"type": "Expression"
 												},
 												"table_name_par": "@item().table_name",
