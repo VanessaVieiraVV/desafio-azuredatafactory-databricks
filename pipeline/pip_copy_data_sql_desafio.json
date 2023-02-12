@@ -237,7 +237,7 @@
 							"type": "Script",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata1",
+									"activity": "GetFileName",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -269,7 +269,7 @@
 							}
 						},
 						{
-							"name": "Get Metadata1",
+							"name": "GetFileName",
 							"type": "GetMetadata",
 							"dependsOn": [
 								{
@@ -286,7 +286,30 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"ds_container": {
+											"value": "@pipeline().parameters.container_par",
+											"type": "Expression"
+										},
+										"ds_directory": {
+											"value": "@concat(pipeline().parameters.directory_par, pipeline().parameters.table_name_par)",
+											"type": "Expression"
+										}
+									}
+								},
+								"fieldList": [
+									"itemName"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								}
+							}
 						}
 					],
 					"ifTrueActivities": [
