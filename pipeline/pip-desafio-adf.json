@@ -180,8 +180,7 @@
 												"itemName",
 												"contentMD5",
 												"structure",
-												"itemType",
-												"exists"
+												"itemType"
 											],
 											"storeSettings": {
 												"type": "AzureBlobFSReadSettings",
