@@ -159,7 +159,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Copy data",
+							"name": "SQL_to_landing",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -294,7 +294,7 @@
 							"type": "GetMetadata",
 							"dependsOn": [
 								{
-									"activity": "Copy data",
+									"activity": "SQL_to_landing",
 									"dependencyConditions": [
 										"Succeeded"
 									]
