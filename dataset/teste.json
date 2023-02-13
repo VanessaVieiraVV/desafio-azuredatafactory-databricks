@@ -18,8 +18,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "adventureworks/incremental/Customer",
-				"fileSystem": "landing"
+				"folderPath": {
+					"value": "@dataset().b",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().a",
+					"type": "Expression"
+				}
 			},
 			"compressionCodec": "snappy"
 		},
