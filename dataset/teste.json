@@ -1,0 +1,19 @@
+{
+	"name": "teste",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_DataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
