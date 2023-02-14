@@ -179,7 +179,7 @@
 			},
 			"directory_par": {
 				"type": "string",
-				"defaultValue": "adventureworks/incremental/"
+				"defaultValue": "adventureworks/"
 			},
 			"schema_par": {
 				"type": "string",
