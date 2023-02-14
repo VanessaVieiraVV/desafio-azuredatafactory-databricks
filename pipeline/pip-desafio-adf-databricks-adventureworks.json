@@ -65,7 +65,7 @@
 					},
 					"baseParameters": {
 						"source_directory": {
-							"value": "@pipeline().parameters.source_directory_par",
+							"value": "@concat(pipeline().parameters.source_directory_par, pipeline().parameters.table_name_par)",
 							"type": "Expression"
 						},
 						"file_name": {
