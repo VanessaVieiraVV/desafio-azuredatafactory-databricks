@@ -361,6 +361,10 @@
 										"value": "@pipeline().parameters.notebook_path_par",
 										"type": "Expression"
 									},
+									"file_name_par": {
+										"value": "@activity('GetFileName').output.childItems[0].name",
+										"type": "Expression"
+									},
 									"table_name_par": {
 										"value": "@pipeline().parameters.table_name_par",
 										"type": "Expression"
