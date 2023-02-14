@@ -31,10 +31,6 @@
 							"value": "@pipeline().parameters.source_directory_par",
 							"type": "Expression"
 						},
-						"dest_directory": {
-							"value": "@pipeline().parameters.dest_directory_par",
-							"type": "Expression"
-						},
 						"file_name": {
 							"value": "@pipeline().parameters.file_name_par",
 							"type": "Expression"
@@ -72,16 +68,8 @@
 							"value": "@pipeline().parameters.source_directory_par",
 							"type": "Expression"
 						},
-						"dest_directory": {
-							"value": "@pipeline().parameters.dest_directory_par",
-							"type": "Expression"
-						},
 						"file_name": {
 							"value": "@pipeline().parameters.file_name_par",
-							"type": "Expression"
-						},
-						"table_name": {
-							"value": "@pipeline().parameters.table_name_par",
 							"type": "Expression"
 						}
 					}
@@ -101,7 +89,10 @@
 				"type": "string",
 				"defaultValue": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/"
 			},
-			"file_name": {
+			"file_name_par": {
+				"type": "string"
+			},
+			"table_name_par": {
 				"type": "string"
 			}
 		},
