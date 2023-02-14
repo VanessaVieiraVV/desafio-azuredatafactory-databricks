@@ -94,10 +94,12 @@
 				"defaultValue": "/Users/vanessa.da.conceicao@avanade.com/Desafio_Caminhos/"
 			},
 			"file_name_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "data_1123e75b-1418-4108-ba2b-e9fd0a10044c_0601f521-ca39-462b-8477-3a7726eed306.parquet"
 			},
 			"table_name_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Customer"
 			}
 		},
 		"annotations": []
