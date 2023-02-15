@@ -162,8 +162,7 @@
 						"source_directory": {
 							"value": "adventureworks",
 							"type": "Expression"
-						},
-						"dest_directory": "adventureworks"
+						}
 					}
 				},
 				"linkedServiceName": {
