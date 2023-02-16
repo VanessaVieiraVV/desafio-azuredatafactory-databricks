@@ -324,7 +324,6 @@
 									}
 								},
 								"fieldList": [
-									"itemName",
 									"childItems"
 								],
 								"storeSettings": {
