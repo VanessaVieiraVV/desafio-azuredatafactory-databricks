@@ -5,6 +5,9 @@
 			"referenceName": "ls_AzureDatabricksDeltaLake",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "estudos"
+		},
 		"annotations": [],
 		"type": "AzureDatabricksDeltaLakeDataset",
 		"typeProperties": {

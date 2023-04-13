@@ -1,0 +1,9 @@
+{
+	"name": "pip-copy-csv-to-sql",
+	"properties": {
+		"folder": {
+			"name": "empodera"
+		},
+		"annotations": []
+	}
+}

@@ -15,6 +15,9 @@
 				"defaultValue": "sql-cc-eng-vvc01.database.windows.net"
 			}
 		},
+		"folder": {
+			"name": "estudos"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": []

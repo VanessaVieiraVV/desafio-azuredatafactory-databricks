@@ -15,6 +15,9 @@
 				"defaultValue": "SalesLT"
 			}
 		},
+		"folder": {
+			"name": "estudos"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],

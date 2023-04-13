@@ -307,6 +307,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								}
 							}
@@ -367,6 +368,9 @@
 			"max_valor_escrito": {
 				"type": "String"
 			}
+		},
+		"folder": {
+			"name": "estudos"
 		},
 		"annotations": [],
 		"lastPublishTime": "2023-02-03T20:48:52Z"

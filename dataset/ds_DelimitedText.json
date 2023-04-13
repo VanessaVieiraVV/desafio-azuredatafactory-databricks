@@ -1,27 +1,23 @@
 {
-	"name": "DelimitedText",
+	"name": "ds_DelimitedText",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_DataLakeStorage",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "estudos"
+			"name": "empodera"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileName": "5m Sales Records.csv",
-				"fileSystem": "landing"
+				"type": "AzureBlobFSLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

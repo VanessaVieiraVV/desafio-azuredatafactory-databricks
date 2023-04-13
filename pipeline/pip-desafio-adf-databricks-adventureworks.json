@@ -98,6 +98,9 @@
 				"defaultValue": "Customer"
 			}
 		},
+		"folder": {
+			"name": "estudos"
+		},
 		"annotations": []
 	}
 }
